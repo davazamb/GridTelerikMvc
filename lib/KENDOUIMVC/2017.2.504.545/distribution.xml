@@ -4,5 +4,6 @@
   <Trial>false</Trial>
   <Dependencies>
     <Project>ba76d9b5-c9dd-4e55-bc77-9c37ef4d1700</Project>
+    <Project>d9d5764e-84af-4d35-8d6a-74d1fbc7c113</Project>
   </Dependencies>
 </Distribution>

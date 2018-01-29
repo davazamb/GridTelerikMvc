@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 
 public class HomeController : Controller
     {
@@ -12,9 +14,30 @@ public class HomeController : Controller
             return View();
         }
 
-        #region Quick Start Primer
-        // These methods were added to assist with the quickstart guide.
-        private IEnumerable<MonthlySalesByEmployeeViewModel> EmployeeAverageSalesQuery(int employeeId, DateTime statsFrom, DateTime statsTo)
+        public ActionResult EmployeeAverageSales(int employeeId, DateTime statsFrom, DateTime statsTo)
+        {
+            var result = EmployeeAverageSalesQuery(employeeId, statsFrom, statsTo);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EmployeeQuarterSales(int employeeId, DateTime statsTo)
+        {
+            DateTime startDate = statsTo.AddMonths(-3);
+
+            var result = EmployeeQuarterSalesQuery(employeeId, statsTo, startDate);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult EmployeesList_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var employees = db.Employees.OrderBy(e => e.FirstName);
+            return Json(employees.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+        }
+
+    #region Quick Start Primer
+    // These methods were added to assist with the quickstart guide.
+    private IEnumerable<MonthlySalesByEmployeeViewModel> EmployeeAverageSalesQuery(int employeeId, DateTime statsFrom, DateTime statsTo)
         {
             return (from allSales in
                                (from o in db.Orders

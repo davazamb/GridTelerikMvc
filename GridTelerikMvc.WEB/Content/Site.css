@@ -22,6 +22,20 @@ article {
         text-transform: uppercase;
     }
 
+
+
+.hamburger {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+#menuPanel {
+    background-color: #fff;
+    padding: 10px;
+    z-index: 3;
+}
+
 /* App */
 #employee-details {
     padding-top: 20px;
@@ -98,3 +112,5 @@ article {
         position: relative;
     }
 }
+
+
